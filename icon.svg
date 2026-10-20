@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d6e1"/><stop offset=".62" stop-color="#fcebea"/><stop offset="1" stop-color="#eef3df"/></linearGradient>
+<linearGradient id="petal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".62" stop-color="#fff4f7"/><stop offset="1" stop-color="#f7bfd0"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#bg)"/><path d="M118 470 C58 352 74 214 160 132 C192 246 186 370 118 470 Z" fill="#9fcd86" stroke="#5f8f52" stroke-width="10" stroke-linejoin="round"/>
+<path d="M118 470 C140 330 92 230 148 160" fill="none" stroke="#cfe6b4" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M150 470 C156 316 226 186 352 150 C400 137 430 150 446 176" stroke="#5f8f52" stroke-width="26"/>
+<path d="M150 470 C156 316 226 186 352 150 C400 137 430 150 446 176" stroke="#9fd07a" stroke-width="13"/>
+<path d="M300 162 Q330 196 316 244" stroke="#5f8f52" stroke-width="15"/><path d="M300 162 Q330 196 316 244" stroke="#9fd07a" stroke-width="6"/>
+<path d="M196 258 Q232 278 228 318" stroke="#5f8f52" stroke-width="13"/><path d="M196 258 Q232 278 228 318" stroke="#9fd07a" stroke-width="5"/>
+<path d="M440 172 Q458 196 448 222" stroke="#5f8f52" stroke-width="11"/><path d="M440 172 Q458 196 448 222" stroke="#9fd07a" stroke-width="4"/>
+</g>
+<path d="M245.2,332.8 C240.5,266.7 275.9,245.5 316.0,245.5 C356.1,245.5 391.5,266.7 386.8,332.8 L417.5,356.4 Q382.1,347.0 365.6,363.5 Q342.0,342.2 316.0,361.1 Q290.0,342.2 266.4,363.5 Q249.9,347.0 214.5,356.4 Z" fill="url(#petal)" stroke="#b25f7c" stroke-width="10" stroke-linejoin="round"/>
+<path d="M177.6,380.4 C174.2,333.4 199.4,318.2 228.0,318.2 C256.6,318.2 281.8,333.4 278.4,380.4 L300.2,397.2 Q275.0,390.5 263.3,402.2 Q246.5,387.1 228.0,400.6 Q209.5,387.1 192.7,402.2 Q181.0,390.5 155.8,397.2 Z" fill="url(#petal)" stroke="#b25f7c" stroke-width="9" stroke-linejoin="round"/>
+<ellipse cx="448" cy="244" rx="20" ry="26" fill="#eef6df" stroke="#7b9f63" stroke-width="8"/></svg>

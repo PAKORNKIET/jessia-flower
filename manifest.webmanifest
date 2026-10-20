@@ -1,0 +1,29 @@
+{
+  "name": "Jessia Flower",
+  "short_name": "Jessia Flower",
+  "description": "มุมอ่านหนังสือ 3 มิติ ดอกระฆังแก้วที่แตะแล้วกระดิ่งดัง มีฝนกับเสียงธรรมชาติให้ปรับเอง เพลงเบา ๆ ตัวจับเวลาอ่านหนังสือ และที่จดโน้ตระหว่างอ่าน",
+  "lang": "th",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8e6ea",
+  "theme_color": "#f8e6ea",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
