@@ -68,6 +68,27 @@ button{cursor:pointer}
 :focus-visible{outline:2px solid var(--rose);outline-offset:2px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
+/* ---------- loading screen: shown from first paint until the 3D scene has drawn ---------- */
+#splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:radial-gradient(ellipse 70% 50% at 50% 38%,#fff7f3,rgba(255,247,243,0) 70%),linear-gradient(180deg,#f4d3de 0%,#f9e3e5 45%,#fdf0ea 75%,#edf1de 100%);
+  color:#4b3442;transition:opacity .8s ease,visibility 0s .8s}
+html[data-splash="dark"] #splash{background:radial-gradient(ellipse 70% 50% at 50% 38%,rgba(120,132,210,.28),rgba(120,132,210,0) 70%),linear-gradient(180deg,#0d1230 0%,#18204a 50%,#262c5a 100%);color:#f1ebf7}
+#splash.done{opacity:0;visibility:hidden}
+.sp-inner{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.sp-icon{width:clamp(96px,26vw,132px);height:auto;overflow:visible}
+.sp-bell{transform-origin:var(--ox) var(--oy);animation:spswing 2.6s ease-in-out infinite alternate}
+@keyframes spswing{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+.sp-title{margin:0;font-family:"Trirong","Noto Serif Thai",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,6vw,2.1rem);letter-spacing:.01em;line-height:1.2}
+.sp-sub{margin:0;font-family:"Anuphan","Noto Sans Thai",system-ui,sans-serif;font-size:.9rem;opacity:.72}
+.sp-bar{width:150px;height:3px;border-radius:3px;background:rgba(75,52,66,.13);overflow:hidden;margin-top:4px}
+.sp-bar i{display:block;width:40%;height:100%;border-radius:3px;background:#5b7b57;animation:spbar 1.5s ease-in-out infinite}
+html[data-splash="dark"] .sp-bar{background:rgba(255,255,255,.14)}
+html[data-splash="dark"] .sp-bar i{background:#9cc39a}
+@keyframes spbar{from{transform:translateX(-110%)}to{transform:translateX(260%)}}
+.sp-credit{position:absolute;left:0;right:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));margin:0;text-align:center;font-family:"Anuphan","Noto Sans Thai",system-ui,sans-serif;font-size:.76rem;opacity:.62}
+@media (prefers-reduced-motion:reduce){.sp-bell,.sp-bar i{animation:none}}
+
 /* ---------- backdrops: flat illustrated layers, only transform/opacity animate ---------- */
 #backdrop{position:fixed;inset:0;overflow:hidden;background:var(--page)}
 .bd{position:absolute;inset:0;opacity:0;visibility:hidden;overflow:hidden;transition:opacity 1.2s ease,visibility 0s 1.2s}
@@ -397,6 +418,28 @@ body.focus.awake .exit-btn{opacity:1;pointer-events:auto}
 </style>
 </head>
 <body>
+<div id="splash" role="status" aria-live="polite">
+  <div class="sp-inner">
+    <svg class="sp-icon" viewBox="40 100 440 400" aria-hidden="true">
+      <defs><linearGradient id="spPetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".62" stop-color="#fff4f7"/><stop offset="1" stop-color="#f7bfd0"/></linearGradient></defs>
+      <path d="M118 470 C58 352 74 214 160 132 C192 246 186 370 118 470 Z" fill="#9fcd86" stroke="#5f8f52" stroke-width="10" stroke-linejoin="round"/>
+      <g fill="none" stroke-linecap="round"><path d="M150 470 C156 316 226 186 352 150 C400 137 430 150 446 176" stroke="#5f8f52" stroke-width="26"/><path d="M150 470 C156 316 226 186 352 150 C400 137 430 150 446 176" stroke="#9fd07a" stroke-width="13"/></g>
+      <g class="sp-bell" style="--ox:300px;--oy:162px;animation-delay:-.6s"><g fill="none" stroke-linecap="round"><path d="M300 162 Q330 196 316 244" stroke="#5f8f52" stroke-width="15"/><path d="M300 162 Q330 196 316 244" stroke="#9fd07a" stroke-width="6"/></g><path d="M245.2,332.8 C240.5,266.7 275.9,245.5 316.0,245.5 C356.1,245.5 391.5,266.7 386.8,332.8 L417.5,356.4 Q382.1,347.0 365.6,363.5 Q342.0,342.2 316.0,361.1 Q290.0,342.2 266.4,363.5 Q249.9,347.0 214.5,356.4 Z" fill="url(#spPetal)" stroke="#b25f7c" stroke-width="10" stroke-linejoin="round"/></g>
+      <g class="sp-bell" style="--ox:196px;--oy:258px"><g fill="none" stroke-linecap="round"><path d="M196 258 Q232 278 228 318" stroke="#5f8f52" stroke-width="13"/><path d="M196 258 Q232 278 228 318" stroke="#9fd07a" stroke-width="5"/></g><path d="M177.6,380.4 C174.2,333.4 199.4,318.2 228.0,318.2 C256.6,318.2 281.8,333.4 278.4,380.4 L300.2,397.2 Q275.0,390.5 263.3,402.2 Q246.5,387.1 228.0,400.6 Q209.5,387.1 192.7,402.2 Q181.0,390.5 155.8,397.2 Z" fill="url(#spPetal)" stroke="#b25f7c" stroke-width="9" stroke-linejoin="round"/></g>
+      <g class="sp-bell" style="--ox:440px;--oy:172px;animation-delay:-1.4s"><path d="M440 172 Q458 196 448 222" fill="none" stroke="#5f8f52" stroke-width="11" stroke-linecap="round"/><ellipse cx="448" cy="244" rx="20" ry="26" fill="#eef6df" stroke="#7b9f63" stroke-width="8"/></g>
+    </svg>
+    <h1 class="sp-title">Jessia Flower</h1>
+    <p class="sp-sub" id="spSub">กำลังเตรียมมุมอ่านหนังสือ</p>
+    <div class="sp-bar" aria-hidden="true"><i></i></div>
+  </div>
+  <p class="sp-credit">สร้างโดย Pakornkiet Puanpanwong</p>
+</div>
+<script>
+/* pick the loading screen's tone before anything else paints: dark when the first scene will be the night scene */
+(function(){try{var s=JSON.parse(localStorage.getItem('lily-bells-v2')||'{}'),h=new Date().getHours(),k=s.autoScene===false?s.scene:(h>=5&&h<10?'meadow':h>=10&&h<16?'garden':h>=16&&h<19?'window':'night');if(k==='night')document.documentElement.setAttribute('data-splash','dark');}catch(e){}
+setTimeout(function(){var t=document.getElementById('spSub');if(t)t.textContent='เกือบพร้อมแล้ว';},5000);
+setTimeout(function(){var sp=document.getElementById('splash');if(sp)sp.classList.add('done');},20000);})();
+</script>
 <div id="backdrop" aria-hidden="true">
   <div class="bd bd-meadow" data-scene="meadow"></div>
   <div class="bd bd-window" data-scene="window"><div class="win"><div class="win-rain"><div class="wr-streaks" id="winRain"></div></div></div><div class="beams"></div><div class="curtain"></div></div>
@@ -2590,14 +2633,15 @@ window.addEventListener('keydown',e=>{
 let resizeT=0;
 window.addEventListener('resize',()=>{clearTimeout(resizeT);resizeT=setTimeout(()=>{if(G)G.resize();layout();panelHint();},80);});
 
-/* ================= boot: build behind the veil, then fade in ================= */
+/* ================= boot: build behind the loading screen, then fade in ================= */
+function hideSplash(){const sp=$('#splash');if(!sp||sp.dataset.gone)return;sp.dataset.gone='1';sp.classList.add('done');setTimeout(()=>sp.remove(),900);}
 const firstScene=S.autoScene?sceneForHour(new Date().getHours()):S.scene;
 $('#veil').style.background=SCENES[firstScene].veil;
 try{
   if(typeof THREE==='undefined'||typeof THREE.OrbitControls!=='function')throw new Error('Three.js did not load');
   G=init3D();
 }catch(err){
-  console.error(err);G=null;$('#notice').hidden=false;
+  console.error(err);G=null;$('#notice').hidden=false;hideSplash();
   (function loop(n){onFrame(n||performance.now());requestAnimationFrame(loop);})();
 }
 $('#panel').hidden=!panelOpen;
@@ -2608,7 +2652,7 @@ syncSoundUI();
 uiReady=true;renderStats();renderNotes();renderBook();Sleep.render();Journal.setStatus();soundHint();layout();requestAnimationFrame(panelHint);
 initCloud();
 if(G){G.bloom(reduceMotion);G.start();}
-requestAnimationFrame(()=>requestAnimationFrame(()=>{$('#veil').classList.remove('on');}));
+requestAnimationFrame(()=>requestAnimationFrame(()=>{$('#veil').classList.remove('on');hideSplash();}));
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{clockDirty=true;layout();});
 })();
 </script>
