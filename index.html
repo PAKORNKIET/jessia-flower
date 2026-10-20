@@ -82,7 +82,9 @@ html[data-splash="dark"] #splash{background:radial-gradient(ellipse 70% 50% at 5
 .sp-title{margin:0;font-family:"Trirong","Noto Serif Thai",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,6vw,2.1rem);letter-spacing:.01em;line-height:1.2}
 .sp-sub{margin:0;font-family:"Anuphan","Noto Sans Thai",system-ui,sans-serif;font-size:.9rem;opacity:.72}
 .sp-bar{width:150px;height:3px;border-radius:3px;background:rgba(75,52,66,.13);overflow:hidden;margin-top:4px}
-.sp-bar i{display:block;width:40%;height:100%;border-radius:3px;background:#5b7b57;animation:spbar 1.5s ease-in-out infinite}
+.sp-bar i{display:block;width:0;height:100%;border-radius:3px;background:#5b7b57;transition:width 2.6s cubic-bezier(.2,.7,.3,1)}
+#splash.go .sp-bar i{width:86%}
+#splash.ready .sp-bar i{width:100%;transition:width .35s ease}
 html[data-splash="dark"] .sp-bar{background:rgba(255,255,255,.14)}
 html[data-splash="dark"] .sp-bar i{background:#9cc39a}
 @keyframes spbar{from{transform:translateX(-110%)}to{transform:translateX(260%)}}
@@ -436,7 +438,7 @@ body.focus.awake .exit-btn{opacity:1;pointer-events:auto}
 </div>
 <script>
 /* pick the loading screen's tone before anything else paints: dark when the first scene will be the night scene */
-(function(){try{var s=JSON.parse(localStorage.getItem('lily-bells-v2')||'{}'),h=new Date().getHours(),k=s.autoScene===false?s.scene:(h>=5&&h<10?'meadow':h>=10&&h<16?'garden':h>=16&&h<19?'window':'night');if(k==='night')document.documentElement.setAttribute('data-splash','dark');}catch(e){}
+(function(){window.__spT=Date.now();requestAnimationFrame(function(){var sp=document.getElementById('splash');if(sp)sp.classList.add('go');});try{var s=JSON.parse(localStorage.getItem('lily-bells-v2')||'{}'),h=new Date().getHours(),k=s.autoScene===false?s.scene:(h>=5&&h<10?'meadow':h>=10&&h<16?'garden':h>=16&&h<19?'window':'night');if(k==='night')document.documentElement.setAttribute('data-splash','dark');}catch(e){}
 setTimeout(function(){var t=document.getElementById('spSub');if(t)t.textContent='เกือบพร้อมแล้ว';},5000);
 setTimeout(function(){var sp=document.getElementById('splash');if(sp)sp.classList.add('done');},20000);})();
 </script>
@@ -2634,7 +2636,10 @@ let resizeT=0;
 window.addEventListener('resize',()=>{clearTimeout(resizeT);resizeT=setTimeout(()=>{if(G)G.resize();layout();panelHint();},80);});
 
 /* ================= boot: build behind the loading screen, then fade in ================= */
-function hideSplash(){const sp=$('#splash');if(!sp||sp.dataset.gone)return;sp.dataset.gone='1';sp.classList.add('done');setTimeout(()=>sp.remove(),900);}
+// the loading screen stays up for at least ~2.6 s so it reads as an intro, fills its bar, then fades and the bells bloom
+function hideSplash(){const sp=$('#splash');if(!sp||sp.dataset.gone)return;sp.dataset.gone='1';
+  const wait=Math.max(0,2600-(Date.now()-(window.__spT||0)));
+  setTimeout(()=>{sp.classList.add('ready');setTimeout(()=>{sp.classList.add('done');if(G&&!reduceMotion)G.bloom(false);setTimeout(()=>sp.remove(),900);},400);},wait);}
 const firstScene=S.autoScene?sceneForHour(new Date().getHours()):S.scene;
 $('#veil').style.background=SCENES[firstScene].veil;
 try{
