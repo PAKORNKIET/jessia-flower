@@ -67,6 +67,11 @@ button,input{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--rose);outline-offset:2px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* the jessia ♡ signature: one pen stroke for the word, two dots, then the heart; it writes itself in */
+.sig{display:block;overflow:visible;height:auto}
+.sig path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sig .sig-w{stroke:var(--sig-ink,currentColor);stroke-width:var(--sig-w,3)}
+.sig .sig-h{stroke:var(--sig-rose,#c06882);stroke-width:var(--sig-w,3);fill:var(--sig-fill,rgba(192,104,130,.2))}
 
 /* ---------- loading screen: shown from first paint until the 3D scene has drawn ---------- */
 #splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;
@@ -79,7 +84,10 @@ html[data-splash="dark"] #splash{background:radial-gradient(ellipse 70% 50% at 5
 .sp-icon{width:clamp(96px,26vw,132px);height:auto;overflow:visible}
 .sp-bell{transform-origin:var(--ox) var(--oy);animation:spswing 2.6s ease-in-out infinite alternate}
 @keyframes spswing{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
-.sp-title{margin:0;font-family:"Trirong","Noto Serif Thai",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,6vw,2.1rem);letter-spacing:.01em;line-height:1.2}
+.sp-title{margin:0;font-family:"Trirong","Noto Serif Thai",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,6vw,2.1rem);letter-spacing:.01em;line-height:1.2;
+  --sig-ink:#4b3442;--sig-rose:#c06882;--sig-fill:rgba(214,120,150,.22);--sig-w:3.3}
+.sp-title .sig{width:min(250px,64vw);margin:-2px auto -4px}
+html[data-splash="dark"] .sp-title{--sig-ink:#f1ebf7;--sig-rose:#f0a6bd;--sig-fill:rgba(240,166,189,.24)}
 .sp-sub{margin:0;font-family:"Anuphan","Noto Sans Thai",system-ui,sans-serif;font-size:.9rem;opacity:.72}
 .sp-bar{width:150px;height:3px;border-radius:3px;background:rgba(75,52,66,.13);overflow:hidden;margin-top:4px}
 .sp-bar i{display:block;width:0;height:100%;border-radius:3px;background:#5b7b57;transition:width 2.6s cubic-bezier(.2,.7,.3,1)}
@@ -167,6 +175,9 @@ body.raining-heavy .beams{display:none}
 .brand svg{width:26px;height:26px;color:var(--accent);flex:none}
 .brand b{display:block;font-family:var(--f-display);font-weight:500;font-size:1.04rem;line-height:1.2}
 .brand small{display:block;font-size:.72rem;color:var(--ink-soft);letter-spacing:.03em}
+.brand-t{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-t small{padding-left:12px;border-left:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand svg.sig{width:128px;height:auto;--sig-ink:var(--ink);--sig-rose:var(--rose);--sig-w:4.4;filter:drop-shadow(0 1px 5px var(--glow))}
 .toolbar{display:flex;gap:8px;pointer-events:auto}
 .tb{position:relative;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:999px;border:1px solid var(--glass-edge);background:var(--glass);
   box-shadow:0 6px 20px -12px rgba(40,20,40,.45);font-size:.88rem;font-weight:500;white-space:nowrap;transition:background .2s,color .2s,transform .15s}
@@ -353,7 +364,8 @@ textarea.inp{resize:vertical;min-height:78px;line-height:1.55}
 .ch-days .today{color:var(--ink);font-weight:600}
 .ch-read{font-size:.8rem;color:var(--ink);min-height:1.3em}
 .credit{font-size:.74rem;letter-spacing:.02em}
-.credit-panel{margin:0;text-align:center;font-size:.74rem;color:var(--ink-soft)}
+.credit-panel{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:.74rem;color:var(--ink-soft)}
+.credit-panel .sig{width:124px;--sig-ink:var(--ink);--sig-rose:var(--rose);--sig-w:4}
 
 /* ---------- bottom ---------- */
 .caption{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:end;gap:16px;padding-inline:clamp(0px,2.5vw,32px);color:var(--ink-soft);font-size:.8rem;line-height:1.5;text-shadow:0 1px 10px var(--glow),0 0 3px var(--glow)}
@@ -409,6 +421,8 @@ body.frozen .bd *,body.frozen #rainLayer *{animation-play-state:paused!important
   background:linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.32) calc(33.33% - .5px),rgba(255,255,255,.32) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.67% - .5px),rgba(255,255,255,.32) calc(66.67% - .5px),rgba(255,255,255,.32) calc(66.67% + .5px),transparent calc(66.67% + .5px)),
     linear-gradient(180deg,transparent calc(33.33% - .5px),rgba(255,255,255,.32) calc(33.33% - .5px),rgba(255,255,255,.32) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.67% - .5px),rgba(255,255,255,.32) calc(66.67% - .5px),rgba(255,255,255,.32) calc(66.67% + .5px),transparent calc(66.67% + .5px))}
 .ph[data-fmt="screen"] .ph-frame{display:none}
+.ph-sig{position:fixed;pointer-events:none;opacity:.9;--sig-ink:var(--ink);--sig-rose:var(--rose);--sig-w:3.8}
+.ph-sig .sig{width:100%}
 .ph-top{position:fixed;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:10px;
   padding:max(14px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
 .ph-top .tb,.ph-panel,.ph-result{pointer-events:auto}
@@ -463,6 +477,7 @@ body.ph-clean .ph-top,body.ph-clean .ph-panel,body.ph-clean .ph-frame{opacity:0;
   .tb .lab{display:none}
   .tb{width:40px;padding:0;justify-content:center}
   .brand small{display:none}
+  .brand svg.sig{width:106px;--sig-w:4.8}
   .middle{flex-direction:column;align-items:center;justify-content:flex-start;padding-inline:0}
   .spacer{display:none}
   body[data-side] .clock{order:0;align-items:center;text-align:center}
@@ -493,12 +508,32 @@ body.ph-clean .ph-top,body.ph-clean .ph-panel,body.ph-clean .ph-frame{opacity:0;
       <g class="sp-bell" style="--ox:196px;--oy:258px"><g fill="none" stroke-linecap="round"><path d="M196 258 Q232 278 228 318" stroke="#5f8f52" stroke-width="13"/><path d="M196 258 Q232 278 228 318" stroke="#9fd07a" stroke-width="5"/></g><path d="M177.6,380.4 C174.2,333.4 199.4,318.2 228.0,318.2 C256.6,318.2 281.8,333.4 278.4,380.4 L300.2,397.2 Q275.0,390.5 263.3,402.2 Q246.5,387.1 228.0,400.6 Q209.5,387.1 192.7,402.2 Q181.0,390.5 155.8,397.2 Z" fill="url(#spPetal)" stroke="#b25f7c" stroke-width="9" stroke-linejoin="round"/></g>
       <g class="sp-bell" style="--ox:440px;--oy:172px;animation-delay:-1.4s"><path d="M440 172 Q458 196 448 222" fill="none" stroke="#5f8f52" stroke-width="11" stroke-linecap="round"/><ellipse cx="448" cy="244" rx="20" ry="26" fill="#eef6df" stroke="#7b9f63" stroke-width="8"/></g>
     </svg>
-    <h1 class="sp-title">Jessia Flower</h1>
+    <h1 class="sp-title"><span class="sr">Jessia Flower</span><span id="spSig"></span></h1>
     <p class="sp-sub" id="spSub">กำลังเตรียมมุมอ่านหนังสือ</p>
     <div class="sp-bar" aria-hidden="true"><i></i></div>
   </div>
   <p class="sp-credit">สร้างโดย Pakornkiet Puanpanwong</p>
 </div>
+<script>
+/* the jessia ♡ signature, shared by the loading screen, the logo, the settings credit and the photo mode */
+window.__SIG={vb:[7,36,254,80],word:'M14 74 C20 66 28 58 34 52 C34 70 32 96 24 108 C18 116 8 112 12 102 C16 90 34 82 46 76 C56 71 66 62 64 55 C62 49 52 52 50 60 C48 70 54 80 64 79 C70 78 76 74 80 70 C84 64 88 56 92 51 C103 63 102 76 93 79 C87 81 82 78 84 75 C90 77 100 76 110 70 C114 64 118 56 122 51 C133 63 132 76 123 79 C117 81 112 78 114 75 C120 77 130 76 138 68 C141 62 144 57 146 53 C144 62 141 72 143 77 C145 81 151 78 155 72 C158 64 161 56 168 53 C173 51 178 52 180 55 C172 49 160 52 157 62 C154 72 160 80 168 77 C174 75 178 64 180 55 C178 66 176 76 181 78 C188 81 198 75 206 66 C209 62 210 58 208 57',dots:['M38 40.5l.7-.9','M150 41.5l.7-.9'],heart:'M241 79 C231 72 221 62 223 51 C225 42 236 41 240 50 C242 41 253 39 256 47 C259 57 251 68 241 79 L239 81'};
+window.__sigSVG=function(){var S=window.__SIG;return '<svg class="sig" viewBox="'+S.vb.join(' ')+'" aria-hidden="true" focusable="false"><path class="sig-w" d="'+S.word+'"/>'+S.dots.map(function(d){return '<path class="sig-w sig-dot" d="'+d+'"/>';}).join('')+'<path class="sig-h" d="'+S.heart+'"/></svg>';};
+window.__sigMount=function(el){if(!el)return null;el.innerHTML=window.__sigSVG();return el.firstChild;};
+// writes the signature in: the word at an even pen speed, a dot for the j and the i, then the heart, whose blush fills in last
+window.__sigPlay=function(svg,o){
+  if(!svg)return;o=o||{};
+  var still=o.still||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var ps=svg.querySelectorAll('path'),h=svg.querySelector('.sig-h'),plan=[[ps[0],1.15],[ps[1],.1],[ps[2],.1],[h,.55]];
+  for(var i=0;i<ps.length;i++){var p=ps[i],L=p.getTotalLength?p.getTotalLength():400;p.style.transition='none';p.style.strokeDasharray=L+' '+(L+3);p.style.strokeDashoffset=(still&&!o.hide)?'0':String(L+1.5);}
+  h.style.fillOpacity=(still&&!o.hide)?'1':'0';
+  if(o.hide||still)return;
+  svg.getBoundingClientRect();
+  var t=o.delay||0,sp=o.speed||1;
+  plan.forEach(function(x){var d=x[1]/sp;x[0].style.transition='stroke-dashoffset '+d+'s cubic-bezier(.42,.08,.4,1) '+t+'s';x[0].style.strokeDashoffset='0';t+=d+.05;});
+  h.style.transition+=',fill-opacity .45s ease '+(t-.15)+'s';h.style.fillOpacity='1';
+};
+(function(){var s=window.__sigMount(document.getElementById('spSig'));window.__sigPlay(s,{delay:.3});})();
+</script>
 <script>
 /* pick the loading screen's tone before anything else paints: dark when the first scene will be the night scene */
 (function(){window.__spT=Date.now();requestAnimationFrame(function(){var sp=document.getElementById('splash');if(sp)sp.classList.add('go');});try{var s=JSON.parse(localStorage.getItem('lily-bells-v2')||'{}'),h=new Date().getHours(),k=s.autoScene===false?s.scene:(h>=5&&h<10?'meadow':h>=10&&h<16?'garden':h>=16&&h<19?'window':'night');if(k==='night')document.documentElement.setAttribute('data-splash','dark');}catch(e){}
@@ -532,7 +567,7 @@ setTimeout(function(){var sp=document.getElementById('splash');if(sp)sp.classLis
         <path d="M6.2 10.6c0-2 1.1-3.3 2.4-3.3s2.4 1.3 2.4 3.3v1.1l1 .9H5.2l1-.9z" fill="currentColor" stroke="none"/>
         <path d="M12.6 13.6c0-2 1.1-3.3 2.4-3.3s2.4 1.3 2.4 3.3v1.1l1 .9h-6.8l1-.9z" fill="currentColor" stroke="none"/>
       </svg>
-      <div><b>Jessia Flower</b><small id="brandSub">มุมอ่านหนังสือยามเช้า</small></div>
+      <div class="brand-t"><b class="sr">Jessia Flower</b><span id="brandSig"></span><small id="brandSub">มุมอ่านหนังสือยามเช้า</small></div>
     </div>
     <nav class="toolbar" aria-label="เครื่องมือ">
       <button class="tb" id="btnSound" type="button" aria-pressed="false">
@@ -741,7 +776,7 @@ setTimeout(function(){var sp=document.getElementById('splash');if(sp)sp.classLis
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
         ขยายเต็มจอ
       </button>
-      <p class="credit-panel">Jessia Flower · สร้างโดย Pakornkiet Puanpanwong</p>
+      <div class="credit-panel"><span class="sr">Jessia Flower</span><span id="creditSig"></span><span>สร้างโดย Pakornkiet Puanpanwong</span></div>
     </aside>
   </main>
 
@@ -757,6 +792,7 @@ setTimeout(function(){var sp=document.getElementById('splash');if(sp)sp.classLis
 </div>
 
 <div class="ph" id="photoUI" hidden>
+  <div class="ph-sig" id="phSig" aria-hidden="true"></div>
   <div class="ph-frame" id="phFrame" aria-hidden="true"></div>
   <div class="ph-top">
     <button type="button" class="tb" id="phExit" aria-label="ออกจากโหมดถ่ายภาพ">
@@ -803,6 +839,7 @@ setTimeout(function(){var sp=document.getElementById('splash');if(sp)sp.classLis
         <label class="switch"><span>หยุดภาพนิ่ง<small>หยุดลม ละออง หัวใจ และสายฝนไว้ตรงนั้น จัดมุมได้ง่ายขึ้น</small></span><input type="checkbox" id="phFreeze"><i></i></label>
         <label class="switch"><span>แสดงนาฬิกาในภาพ</span><input type="checkbox" id="phClock"><i></i></label>
         <div class="seg" id="phClockPos" hidden><button type="button" data-v="top">บน</button><button type="button" data-v="bottom">ล่าง</button><button type="button" data-v="left">ซ้าย</button><button type="button" data-v="right">ขวา</button></div>
+        <label class="switch"><span>ลายเซ็นมุมภาพ<small>jessia ♡ เล็ก ๆ ที่มุมขวาล่างของภาพ</small></span><input type="checkbox" id="phSigT"><i></i></label>
         <label class="switch"><span>ซ่อนพื้นหญ้า<small>เหลือแค่ดอกกับใบบนพื้นหลัง ดูมินิมอล</small></span><input type="checkbox" id="phNoGround"><i></i></label>
       </div>
       <div class="field"><span class="lbl">ฉาก <output id="phSceneO"></output></span><div class="ph-scenes" id="phScenes"></div></div>
@@ -899,7 +936,7 @@ const DEFAULTS={clockStyle:'digital',clockFont:'classic',clockColor:'auto',clock
   showSeconds:true,h24:true,showDate:true,scene:'meadow',autoScene:true,pink:7,wind:8,motes:7,autoRotate:true,outlines:true,showBook:true,
   mix:JSON.parse(JSON.stringify(MIX_DEFAULTS)),timerPreset:'25',readMin:25,breakMin:5,timerBell:true,breath:'calm',
   vol:{nature:60,wind:55,chime:40,music:45,bell:75,master:70},
-  photo:{fmt:'',clock:false,clockPos:'top',ground:true}};
+  photo:{fmt:'',clock:false,clockPos:'top',ground:true,sig:true}};
 const clone=o=>JSON.parse(JSON.stringify(o));
 function loadSettings(){
   let s=clone(DEFAULTS);
@@ -2449,6 +2486,14 @@ function onFrame(now){tickClock();breathUpdate(now);if(photoMode&&now-phSyncT>12
 
 /* ================= UI wiring ================= */
 const root=document.documentElement,body=document.body;
+/* ---- signatures: the logo writes itself after the loading screen and on every scene change; the credit writes itself when scrolled into view ---- */
+const sigPlay=(svg,o)=>{if(svg&&window.__sigPlay)window.__sigPlay(svg,o);};
+const sigMount=sel=>{const el=$(sel);if(!el||!window.__sigMount){if(el&&el.previousElementSibling)el.previousElementSibling.classList.remove('sr');return null;}return window.__sigMount(el);};
+const brandSig=sigMount('#brandSig'),creditSig=sigMount('#creditSig'),phSigEl=sigMount('#phSig');
+[brandSig,creditSig,phSigEl].forEach(s=>sigPlay(s,{hide:true}));
+// starts watching once the loading screen is gone, so a credit that is already in view still gets written in front of you
+const creditIO=creditSig&&'IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)sigPlay(creditSig,{delay:.15});else sigPlay(creditSig,{hide:true});}),{root:$('#panel'),threshold:.9}):null;
+if(creditSig&&!creditIO)sigPlay(creditSig,{still:true});
 let panelOpen=innerWidth>=720,focusMode=false,sceneKey=null;
 const TEX=(function(){
   const stars=(n,maxR,seed)=>g=>{const R=mulberry32(seed),s=512;for(let i=0;i<n;i++){g.fillStyle=`rgba(255,250,235,${(.3+R()*.7).toFixed(3)})`;g.beginPath();g.arc(R()*s,R()*s,R()*maxR+.3,0,TAU);g.fill();}};
@@ -2537,7 +2582,9 @@ function layout(){
 }
 let veilT=0;
 function doSwitch(key){
+  const was=sceneKey;
   sceneKey=key;S.scene=key;
+  if(was!==null&&was!==key&&!photoMode)sigPlay(brandSig,{delay:.45});
   const sc=SCENES[key];
   body.dataset.scene=key;body.dataset.tone=sc.tone;
   $$('.bd').forEach(b=>b.classList.toggle('on',b.dataset.scene===key));
@@ -2888,6 +2935,9 @@ function phLayout(){
   st.setProperty('--cx',cx+'px');st.setProperty('--cy',cy+'px');st.setProperty('--ct',ct);st.setProperty('--ca',ca);st.setProperty('--cta',ta);
   // the pan is a share of the frame, so the composition holds when the window or format changes
   if(G)G.setShift(fr.x+fr.w/2-innerWidth/2+phPan.x*fr.w,fr.y+fr.h/2-innerHeight/2+phPan.y*fr.h);
+  const sg=$('#phSig');sg.hidden=!PH.sig;
+  if(PH.sig&&window.__SIG){const vb=window.__SIG.vb,m=Math.min(fr.w,fr.h),w=Math.max(64,m*.22),h=w*vb[3]/vb[2],g=m*.05;
+    sg.style.width=w+'px';sg.style.left=(fr.x+fr.w-w-g)+'px';sg.style.top=(fr.y+fr.h-h-g)+'px';}
   const [W,H]=phExportSize(fr);$('#phSizeO').textContent=`${W} × ${H} px`;
 }
 function phClockPan(){
@@ -2899,7 +2949,7 @@ function phRender(){
   $$('#phFmt button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.f===PH.fmt)));
   $$('#phClockPos button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===PH.clockPos)));
   $('#phClockPos').hidden=!PH.clock;
-  $('#phClock').checked=!!PH.clock;$('#phNoGround').checked=!PH.ground;$('#phFreeze').checked=phFreeze;
+  $('#phClock').checked=!!PH.clock;$('#phNoGround').checked=!PH.ground;$('#phFreeze').checked=phFreeze;$('#phSigT').checked=!!PH.sig;
   const k=sceneKey||S.scene;
   $$('#phScenes button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scene===k)));
   $('#phSceneO').textContent=SCENES[k].name;
@@ -2942,6 +2992,7 @@ function enterPhoto(){
   phSetFreeze(false);phRender();phLayout();
   G.setOrbit({dist:phFit(),target:G.TARGET},.8);
   phSync(true);
+  if(PH.sig)sigPlay(phSigEl,{delay:.5});
   if(!phTold){phTold=true;toast('จัดมุมด้วยการลากหรือแผงปรับ แล้วกด “บันทึกภาพ”',3600);}
 }
 function exitPhoto(){
@@ -3166,7 +3217,16 @@ const Paint=(function(){
       c.fillText(txt,r.left,base);c.restore();
     }
   }
-  return{backdrop,clock,free(){if(L){L.width=L.height=1;L=null;}}};
+  function sig(c){
+    const el=$('#phSig'),svg=el&&!el.hidden&&el.querySelector('svg');if(!svg||typeof Path2D!=='function')return;
+    const r=svg.getBoundingClientRect(),vb=svg.viewBox.baseVal;if(!r.width||!vb||!vb.width)return;
+    const k=Math.min(r.width/vb.width,r.height/vb.height),ox=r.left+(r.width-vb.width*k)/2-vb.x*k,oy=r.top+(r.height-vb.height*k)/2-vb.y*k;
+    c.save();c.globalAlpha=opac(el);c.translate(ox,oy);c.scale(k,k);c.lineCap='round';c.lineJoin='round';
+    svg.querySelectorAll('path').forEach(p=>{const st=getComputedStyle(p),P=new Path2D(p.getAttribute('d'));c.lineWidth=parseFloat(st.strokeWidth)||3;
+      if(p.classList.contains('sig-h')&&st.fill&&st.fill!=='none'){c.fillStyle=st.fill;c.fill(P);}c.strokeStyle=st.stroke;c.stroke(P);});
+    c.restore();
+  }
+  return{backdrop,clock,sig,free(){if(L){L.width=L.height=1;L=null;}}};
 })();
 
 async function makeWallpaper(){
@@ -3179,6 +3239,7 @@ async function makeWallpaper(){
     ctx.setTransform.apply(ctx,E.T);Paint.backdrop(ctx,E);
     ctx.setTransform(1,0,0,1,0,0);G.renderRegion(ctx,fr,k);
     if(PH.clock){ctx.setTransform.apply(ctx,E.T);Paint.clock(ctx,E);}
+    if(PH.sig){ctx.setTransform.apply(ctx,E.T);Paint.sig(ctx);}
   }finally{Paint.free();}
   const blob=await new Promise((res,rej)=>{try{cv.toBlob(b=>b?res(b):rej(new Error('toBlob failed')),'image/png');}catch(e){rej(e);}});
   cv.width=cv.height=1;
@@ -3250,6 +3311,7 @@ $('#phFmt').addEventListener('click',e=>{const b=e.target.closest('button');if(!
 $('#phFreeze').addEventListener('change',e=>phSetFreeze(e.target.checked));
 $('#phClock').addEventListener('change',e=>{PH.clock=e.target.checked;phClockPan();phRender();phLayout();clockDirty=true;tickClock();save();});
 $('#phClockPos').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;PH.clockPos=b.dataset.v;phClockPan();phRender();phLayout();save();});
+$('#phSigT').addEventListener('change',e=>{PH.sig=e.target.checked;phRender();phLayout();if(PH.sig)sigPlay(phSigEl,{delay:.05});save();});
 $('#phNoGround').addEventListener('change',e=>{PH.ground=!e.target.checked;if(G)G.setGround(PH.ground);save();});
 
 let resizeT=0;
@@ -3259,7 +3321,7 @@ window.addEventListener('resize',()=>{clearTimeout(resizeT);resizeT=setTimeout((
 // the loading screen stays up for at least ~2.6 s so it reads as an intro, fills its bar, then fades and the bells bloom
 function hideSplash(){const sp=$('#splash');if(!sp||sp.dataset.gone)return;sp.dataset.gone='1';
   const wait=Math.max(0,2600-(Date.now()-(window.__spT||0)));
-  setTimeout(()=>{sp.classList.add('ready');setTimeout(()=>{sp.classList.add('done');if(G&&!reduceMotion)G.bloom(false);setTimeout(()=>sp.remove(),900);},400);},wait);}
+  setTimeout(()=>{sp.classList.add('ready');setTimeout(()=>{sp.classList.add('done');if(G&&!reduceMotion)G.bloom(false);sigPlay(brandSig,{delay:.35});if(creditIO)creditIO.observe(creditSig);setTimeout(()=>sp.remove(),900);},400);},wait);}
 const firstScene=S.autoScene?sceneForHour(new Date().getHours()):S.scene;
 $('#veil').style.background=SCENES[firstScene].veil;
 try{
